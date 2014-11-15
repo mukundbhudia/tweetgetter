@@ -4,7 +4,6 @@
   "description": "An app that obtains tweets for a given Twitter user",
   "author": "Mukund Bhudia <mukund_bhudia@hotmail.com>",
   "version": "0.1.0",
-  "private": true,
   "scripts": {
     "start": "node ./bin/www"
   },
