@@ -5,6 +5,12 @@ A nodejs app that obtains tweets for a given Twitter user
 
 You will need to create a Twitter App and have node installed.
 
+To created a Twitter app, 
+- Visit https://apps.twitter.com, log-in and then click 'Create New App'.
+- Fill out the details and submit the form.
+- On the 'Keys and Access tokens' tab click 'Create my access token'.
+- The keys will be generated and you now have the four keys necessary to run tweetgetter.
+
 Once installed, execute using "node ./bin/www". Naviagte to http://localhost:3000/ and enter the consumer and access keys for your twitter app account.
 The keys include:
 - Consumer key
