@@ -1,6 +1,9 @@
 {
   "name": "tweetgetter",
-  "version": "0.0.1",
+  "version": "0.1.0",
+  "description": "An app that obtains tweets for a given Twitter user",
+  "author": "Mukund Bhudia <mukund_bhudia@hotmail.com>",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www"
@@ -15,5 +18,9 @@
     "morgan": "~1.3.0",
     "serve-favicon": "~2.1.3",
     "twitter": "0.2.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mukundbhudia/tweetgetter.git"
   }
 }
