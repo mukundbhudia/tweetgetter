@@ -3,7 +3,16 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'TweetGetter' });
+	var twitterKeys = req.app.get('twitterkeys');
+
+	if (req.app.get('twitterkeys')) {
+		var baseUrl = req.protocol + '://' + req.get('host') + "/";
+    	var tweetUrl = baseUrl + "tweets";
+		res.render('userkeys', {title: 'Keys file found and loaded', keys: JSON.stringify(twitterKeys), userTweetUrl: tweetUrl});
+	} else {
+		res.render('index', { title: 'TweetGetter' });
+	}
+	
 });
 
 module.exports = router;

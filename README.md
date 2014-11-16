@@ -18,6 +18,13 @@ The keys include:
 - Access token key
 - Access token secret
 
+Alternatively you can create the file 'keys.txt' in the root directory of the project with the consumer and access keys in JSON form like the following:
+
+{"consumer_key":"******",
+"consumer_secret":"******",
+"access_token_key":"******",
+"access_token_secret":"******"}
+
 Once these have been entered you may visit the url http://localhost:3000/tweets/[twitteruser]/[numberOfTweets] to display tweets. Where [twitteruser] is the twitter user name and [numberOfTweets] is the number of tweets to display for the given username.
 
 For example, the URL for the last 15 tweets for the user @bbcweather would be http://localhost:3000/tweets/bbcweather/15/.

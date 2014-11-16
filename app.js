@@ -28,6 +28,25 @@ app.use('/', routes);
 app.use('/tweets', tweets);
 app.use('/userkeys', userkeys);
 
+fs = require('fs')
+fs.readFile('keys.txt', 'utf8', function (err, data) {
+
+    if (err) {
+        return console.log(err);
+
+    } else {
+
+        try {
+            JSON.parse(data);
+            app.set('twitterkeys', JSON.parse(data));
+            return console.log("Keys file 'keys.txt' found and loaded");
+
+        } catch (e) {
+            return console.error("Keys file 'keys.txt' found but is not in JSON form");
+        }
+    }
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
