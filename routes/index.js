@@ -5,7 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
 	var twitterKeys = req.app.get('twitterkeys');
 
-	if (req.app.get('twitterkeys')) {
+	if (twitterKeys && (req.app.get('authenticated') == true) ) {
 		var baseUrl = req.protocol + '://' + req.get('host') + "/";
     	var tweetUrl = baseUrl + "tweets";
 		res.render('userkeys', {title: 'Keys file found and loaded', keys: JSON.stringify(twitterKeys), userTweetUrl: tweetUrl});

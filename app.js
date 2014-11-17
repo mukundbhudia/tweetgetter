@@ -28,11 +28,15 @@ app.use('/', routes);
 app.use('/tweets', tweets);
 app.use('/userkeys', userkeys);
 
+var util = require('util'),
+    twitter = require('twitter');
+app.set('authenticated', false);
 var keysFileName = "keys.json"
 fs = require('fs')
 fs.readFile(keysFileName, 'utf8', function (err, data) {
 
     if (err) {
+        app.set('authenticated', false);
         return console.log(err);
 
     } else {
@@ -40,9 +44,25 @@ fs.readFile(keysFileName, 'utf8', function (err, data) {
         try {
             JSON.parse(data);
             app.set('twitterkeys', JSON.parse(data));
-            return console.log("Keys file '" + keysFileName + "' found and loaded");
+            console.log("Keys file '" + keysFileName + "' found and loaded. Attempting Twitter authentication...");
 
+            var twitterkeys = app.get('twitterkeys');
+            var twit = new twitter(twitterkeys);
+            twit.verifyCredentials(function(data) {
+                
+                if (data.statusCode === 401) {
+                    app.set('authenticated', false);
+                    return console.error("Authentication failure. The keys provided have not been authorised.");
+                } else {
+                    app.set('authenticated', true);
+                    return console.log("User @" + data.screen_name + " authenticated.");
+                }
+
+            });
+            
         } catch (e) {
+            console.error(e);
+            app.set('authenticated', false);
             return console.error("Keys file '" + keysFileName + "' found but is not in JSON form");
         }
     }
