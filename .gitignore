@@ -28,4 +28,4 @@ build/Release
 node_modules
 
 # Secret keys file (should never be comitted)
-keys.txt
+keys.json
