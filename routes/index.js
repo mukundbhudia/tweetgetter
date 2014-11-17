@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res) {
 	var twitterKeys = req.app.get('twitterkeys');
-
+	
 	if (twitterKeys && (req.app.get('authenticated') == true) ) {
 		var baseUrl = req.protocol + '://' + req.get('host') + "/";
     	var tweetUrl = baseUrl + "tweets";

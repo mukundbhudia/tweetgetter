@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var tweets = require('./routes/tweets');
 var userkeys = require('./routes/userkeys');
+var auth = require('./auth');
 
 var app = express();
 
@@ -47,19 +48,9 @@ fs.readFile(keysFileName, 'utf8', function (err, data) {
             console.log("Keys file '" + keysFileName + "' found and loaded. Attempting Twitter authentication...");
 
             var twitterkeys = app.get('twitterkeys');
-            var twit = new twitter(twitterkeys);
-            twit.verifyCredentials(function(data) {
-                
-                if (data.statusCode === 401) {
-                    app.set('authenticated', false);
-                    return console.error("Authentication failure. The keys provided have not been authorised.");
-                } else {
-                    app.set('authenticated', true);
-                    return console.log("User @" + data.screen_name + " authenticated.");
-                }
-
-            });
-            
+            auth.twitterAuthenticator(twitterkeys, function(result, twitterName){
+                app.set('authenticated', result);
+            });          
         } catch (e) {
             console.error(e);
             app.set('authenticated', false);

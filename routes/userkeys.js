@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var auth = require('../auth');
 
 /* GET home page. */
 router.post('/', function(req, res, next){    
@@ -10,8 +11,15 @@ router.post('/', function(req, res, next){
     if(postData) {
     	req.app.set('twitterkeys', postData);
     	console.log("User has submitted keys");
-        req.app.set('authenticated', true); //TODO: this is an assumption at the moment must authenticated posted keys too
-	    res.render('userkeys', {title: 'Keys submitted', keys: JSON.stringify(postData), userTweetUrl: tweetUrl});
+        auth.twitterAuthenticator(postData, function(result, twitterName){
+            req.app.set('authenticated', result);
+            if (result == true) {
+                res.render('userkeys', {title: 'Welcome @' + twitterName +', your keys have been accepted', keys: JSON.stringify(postData), userTweetUrl: tweetUrl});
+            } else {
+                res.render('index', { title: 'TweetGetter', infoMessage: "Authentication failure. The keys provided have not been authorised, please try again." });
+            }
+        });
+	    
     } else {
         req.app.set('authenticated', false);
     	res.send("Opps! Something went wrong please try again: " + baseUrl);

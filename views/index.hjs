@@ -5,6 +5,7 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <p>{{ infoMessage }}</p>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
     <p>You'll need your Twitter API consumer and access keys. Enter them below</p>
