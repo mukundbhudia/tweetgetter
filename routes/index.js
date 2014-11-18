@@ -8,7 +8,8 @@ router.get('/', function(req, res) {
 	if (twitterKeys && (req.app.get('authenticated') == true) ) {
 		var baseUrl = req.protocol + '://' + req.get('host') + "/";
     	var tweetUrl = baseUrl + "tweets";
-		res.render('userkeys', {title: 'Keys file found and loaded', keys: JSON.stringify(twitterKeys), userTweetUrl: tweetUrl});
+    	var twitterUser = req.app.get('twitterUser');
+		res.render('userkeys', {title: 'Welcome @' + twitterUser +', your Twitter API keys have been found and loaded', keys: JSON.stringify(twitterKeys), userTweetUrl: tweetUrl});
 	} else {
 		res.render('index', { title: 'TweetGetter' });
 	}

@@ -7,10 +7,12 @@
   <body>
     <h1>{{ title }}</h1>
     <p>Your consumer and access keys have been submitted successfully. <strong>Note: they are not stored on this server.</strong></p>
+    <hr>
     <div>
         {{ keys }}
     </div>
     <hr>
+    <br>
         <p>
             You may visit the url {{ userTweetUrl }}/<strong>[twitteruser]</strong>/<strong>[numberOfTweets]</strong> to display tweets.
             Where <strong>[twitteruser]</strong> is the twitter user name and <strong>[numberOfTweets]</strong> is the number of tweets to display for the given username.

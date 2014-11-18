@@ -49,6 +49,7 @@ fs.readFile(keysFileName, 'utf8', function (err, data) {
 
             var twitterkeys = app.get('twitterkeys');
             auth.twitterAuthenticator(twitterkeys, function(result, twitterName){
+                app.set('twitterUser', twitterName);
                 app.set('authenticated', result);
             });          
         } catch (e) {

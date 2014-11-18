@@ -18,7 +18,7 @@ The keys include:
 - Access token key
 - Access token secret
 
-Alternatively you can create the file 'keys.txt' in the root directory of the project with the consumer and access keys in JSON form like the following:
+Alternatively you can create the file 'keys.json' in the root directory of the project with the consumer and access keys in JSON form like the following:
 
 {"consumer_key":"******",
 "consumer_secret":"******",

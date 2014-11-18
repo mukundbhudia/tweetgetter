@@ -16,7 +16,7 @@ router.get('/:screen_name/:tweetCount', function(req, res, next) {
 	var tweetString = "<ul>";
 	var baseUrl = req.protocol + '://' + req.get('host') + "/";
 
-	if (twitterkeys) {
+	if (twitterkeys && (req.app.get('authenticated') == true)) {
 		screenName = req.params.screen_name;
 		numberOfTweets = req.params.tweetCount;
 		console.log("Looking for " + numberOfTweets + " tweets from @" + screenName + "...");
@@ -43,13 +43,14 @@ router.get('/:screen_name/:tweetCount', function(req, res, next) {
 				res.send("Opps! There were no tweets found for @" + screenName + ". Please try again: " + baseUrl);
 
 			} else {
+				// TODO: This may not be needed
 				console.error("Twitter retreival failure");
 				res.send("Opps! It seems we cannot retreive twitter data. Have you submitted your Twitter API consumer and access keys? Please try again: " + baseUrl);
 			}	
 		});
 
 	} else {
-		res.send("Opps! It seems your twitter keys are blank. Please try again: " + baseUrl);
+		res.send("Opps! It seems your Twitter API keys have been unauthorised or are blank. Please try again: " + baseUrl);
 	}
 
 });

@@ -14,6 +14,7 @@ router.post('/', function(req, res, next){
         auth.twitterAuthenticator(postData, function(result, twitterName){
             req.app.set('authenticated', result);
             if (result == true) {
+                req.app.set('twitterUser', twitterName);
                 res.render('userkeys', {title: 'Welcome @' + twitterName +', your keys have been accepted', keys: JSON.stringify(postData), userTweetUrl: tweetUrl});
             } else {
                 res.render('index', { title: 'TweetGetter', infoMessage: "Authentication failure. The keys provided have not been authorised, please try again." });
