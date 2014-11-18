@@ -52,8 +52,8 @@ fs.readFile(keysFileName, 'utf8', function (err, data) {
                 app.set('twitterUser', twitterName);
                 app.set('authenticated', result);
             });          
-        } catch (e) {
-            console.error(e);
+        } catch (error) {
+            console.error(error);
             app.set('authenticated', false);
             return console.error("Keys file '" + keysFileName + "' found but is not in JSON form");
         }

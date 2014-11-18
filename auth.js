@@ -16,9 +16,11 @@ module.exports = {
                 console.error("Authentication failure. Bad request, possible blank keys entered.");
                 callback && callback(false);
 
-            } else {
+            } else if (data.screen_name) {
                 console.log("User @" + data.screen_name + " authenticated.");
                 callback && callback(true, data.screen_name);
+            } else {
+                throw new Error("Connection with Twitter cannot be established");
             }
         });
     }
