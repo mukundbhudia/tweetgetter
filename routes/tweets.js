@@ -4,17 +4,18 @@ var router = express.Router();
 var util = require('util'),
     twitter = require('twitter');
 
-var screenName;
+var screenName;	//This is the Twitter username e.g. @bbcweather
 var numberOfTweets;
 
+/* GET tweets route. Visiting this route will result in a list of tweets. */
 router.get('/:screen_name/:tweetCount', function(req, res, next) {
 
 	var twitterkeys = req.app.get('twitterkeys');
 	var twit = new twitter(twitterkeys);
-	var tweetData;
+	var tweetData;	//The data returned by Twitter (in JSON)
 	var tweets = [];
-	var tweetString = "<ul>";
-	var baseUrl = req.protocol + '://' + req.get('host') + "/";
+	var tweetString = "<ul>";	//The app will return tweets as a list
+	var baseUrl = req.protocol + '://' + req.get('host') + "/"; // The url that the app is running from
 
 	if (twitterkeys && (req.app.get('authenticated') == true)) {
 		screenName = req.params.screen_name;
@@ -27,8 +28,9 @@ router.get('/:screen_name/:tweetCount', function(req, res, next) {
 		
 			if (tweetData && twitres.statusCode == 200 && tweetData.length > 0) {
 				for (var i = 0; i < tweetData.length; i++){
+					//We go through each tweet...
 					tweets.push(tweetData[i]['text']);
-					tweetString += "<li>" + tweetData[i]['text'] + "</li>";
+					tweetString += "<li>" + tweetData[i]['text'] + "</li>"; //...and form it as a list element
 				}
 
 				console.log("Found " + tweets.length + " tweets from @" + screenName);
@@ -39,6 +41,7 @@ router.get('/:screen_name/:tweetCount', function(req, res, next) {
 				res.send("@" + screenName + " has not tweeted yet.");
 
 			} else if (twitres.statusCode == 404) {
+				//404 status could be when a user does not exist
 				console.error("No results found");
 				res.send("Opps! There were no tweets found for @" + screenName + ". Please try again: " + baseUrl);
 

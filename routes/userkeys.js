@@ -2,16 +2,16 @@ var express = require('express');
 var router = express.Router();
 var auth = require('../auth');
 
-/* GET home page. */
+/* POST userkeys route. This is visited when the API keys form from the index page is posted */
 router.post('/', function(req, res, next){    
     var postData = req.body;
     var baseUrl = req.protocol + '://' + req.get('host') + "/";
-    var tweetUrl = baseUrl + "tweets";
+    var tweetUrl = baseUrl + "tweets";  //In case something goes wrong the URL to access tweets is formed for easy user access
 
     if(postData) {
     	req.app.set('twitterkeys', postData);
     	console.log("User has submitted keys");
-        auth.twitterAuthenticator(postData, function(result, twitterName){
+        auth.twitterAuthenticator(postData, function(result, twitterName){  //Need to authenticate posted keys
             req.app.set('authenticated', result);
             if (result == true) {
                 req.app.set('twitterUser', twitterName);

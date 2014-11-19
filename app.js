@@ -32,24 +32,25 @@ app.use('/userkeys', userkeys);
 var util = require('util'),
     twitter = require('twitter');
 app.set('authenticated', false);
-var keysFileName = "keys.json"
+var keysFileName = "keys.json"  //The name of the Twitter API keys JSON file
+//When the app is loaded we look for the Twitter API keys file to autmatically authenticate a user
 fs = require('fs')
 fs.readFile(keysFileName, 'utf8', function (err, data) {
 
     if (err) {
-        app.set('authenticated', false);
+        app.set('authenticated', false);    //Filesystem based error, still unauthenticated
         return console.log(err);
 
     } else {
 
         try {
-            JSON.parse(data);
+            JSON.parse(data);   //Attempt to Parse as JSON
             app.set('twitterkeys', JSON.parse(data));
             console.log("Keys file '" + keysFileName + "' found and loaded. Attempting Twitter authentication...");
 
             var twitterkeys = app.get('twitterkeys');
             auth.twitterAuthenticator(twitterkeys, function(result, twitterName){
-                app.set('twitterUser', twitterName);
+                app.set('twitterUser', twitterName);    //Authentication performed and variabled set
                 app.set('authenticated', result);
             });          
         } catch (error) {
