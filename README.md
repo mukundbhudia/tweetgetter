@@ -27,4 +27,7 @@ Alternatively you can create the file 'keys.json' in the root directory of the p
 
 Once these have been entered you may visit the url http://localhost:3000/tweets/[twitteruser]/[numberOfTweets] to display tweets. Where [twitteruser] is the twitter user name and [numberOfTweets] is the number of tweets to display for the given username.
 
+To return tweets in JSON form you can use the query parameter ?out=json like so: http://localhost:3000/tweets/[twitteruser]/[numberOfTweets]?out=json.
+
 For example, the URL for the last 15 tweets for the user @bbcweather would be http://localhost:3000/tweets/bbcweather/15/.
+And for json form of the same example the URL would be: http://localhost:3000/tweets/bbcweather/15?out=json.

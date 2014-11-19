@@ -16,9 +16,13 @@
         <p>
             You may visit the url {{ userTweetUrl }}/<strong>[twitteruser]</strong>/<strong>[numberOfTweets]</strong> to display tweets.
             Where <strong>[twitteruser]</strong> is the twitter user name and <strong>[numberOfTweets]</strong> is the number of tweets to display for the given username.
+            <br>
+            To return tweets in JSON form you can use the query parameter ?out=json like so: {{ userTweetUrl }}/<strong>[twitteruser]</strong>/<strong>[numberOfTweets]</strong>?out=json.
         </p>
         <p>
             For example, the URL for the last 15 tweets for the user <a href="https://twitter.com/bbcweather">@bbcweather</a> would be <a href="{{ userTweetUrl }}/bbcweather/15/">{{ userTweetUrl }}/bbcweather/15/</a>.
+            <br>
+            And for json form of the same example the URL would be: <a href="https://twitter.com/bbcweather">@bbcweather</a> would be <a href="{{ userTweetUrl }}/bbcweather/15?out=json">{{ userTweetUrl }}/bbcweather/15?out=json</a>.
         </p>
   </body>
 </html>
