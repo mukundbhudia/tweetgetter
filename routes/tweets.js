@@ -34,13 +34,13 @@ router.get('/:screen_name/:tweetCount', function(req, res, next) {
 					tweetString += "<li>" + tweetData[i]['text'] + "</li>"; //...and form it as a list element
 				}
 				console.log("Found " + tweets.length + " tweets from @" + screenName);
-				//Check to see if the user has requested json output
-				if (tweetsOutput == "json") {
+				//Check to see if the user has requested a specific output
+				if (tweetsOutput == "list") {
 					console.log("Output query found. Outputting tweets in " + tweetsOutput + " form.");
-					res.json({tweets: tweets});
+					res.send(tweetString + "</ul>");
 				} else {
 					//Default view of tweets for no output paramaters specified
-					res.send(tweetString + "</ul>");
+					res.json({tweets: tweets});					
 				}
 				
 
