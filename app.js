@@ -32,17 +32,21 @@ app.use('/userkeys', userkeys);
 var util = require('util'),
     twitter = require('twitter');
 app.set('authenticated', false);
-var keysFileName = "keys.json"  //The name of the Twitter API keys JSON file
+
+var keysFileName = "keys.json"      //The name of the Twitter API keys JSON file
 //When the app is loaded we look for the Twitter API keys file to autmatically authenticate a user
 fs = require('fs')
 fs.readFile(keysFileName, 'utf8', function (err, data) {
 
-    if (err) {
-        app.set('authenticated', false);    //Filesystem based error, still unauthenticated
+    if (err && (err.errno == 34)) {         //34 is file not found error
+        app.set('authenticated', false);    //File not found error, still unauthenticated
+        return console.log("Keys file '" + keysFileName + "' not found. Manual authentication required.");
+
+    } else if (err && (err.errno != 34)) {  //Another file error has occured
+        app.set('authenticated', false);    //Still unable to authenticate
         return console.log(err);
 
     } else {
-
         try {
             JSON.parse(data);   //Attempt to Parse as JSON
             app.set('twitterkeys', JSON.parse(data));
@@ -52,7 +56,7 @@ fs.readFile(keysFileName, 'utf8', function (err, data) {
             auth.twitterAuthenticator(twitterkeys, function(result, twitterName){
                 app.set('twitterUser', twitterName);    //Authentication performed and variabled set
                 app.set('authenticated', result);
-            });          
+            });        
         } catch (error) {
             console.error(error);
             app.set('authenticated', false);
