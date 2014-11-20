@@ -8,22 +8,23 @@
     <p>{{ infoMessage }}</p>
     <h1>{{ title }}</h1>
     <p>Welcome to {{ title }}</p>
-    <p>You'll need your Twitter API consumer and access keys. Enter them below</p>
+    <p>You'll need your Twitter API consumer and access keys. Enter them below:</p>
     <div>
     	<form id="keyForm" action="userkeys" method="post">
     		<div>
         		<label for="consumer_key">Consumer key: </label>
-        		<input type="text" id="consumer_key" name="consumer_key"></input>
-
+        		<input type="text" size='70' id="consumer_key" name="consumer_key"></input>
+                <br>
         		<label for="consumer_secret">Consumer secret: </label>
-        		<input type="text" id="consumer_secret" name="consumer_secret"></input>
-
+        		<input type="text" size='70' id="consumer_secret" name="consumer_secret"></input>
+                <br>
         		<label for="access_token_key">Access token key: </label>
-        		<input type="text" id="access_token_key" name="access_token_key"></input>
-
+        		<input type="text" size='70' id="access_token_key" name="access_token_key"></input>
+                <br>
         		<label for="access_token_secret">Access token secret: </label>
-        		<input type="text" id="access_token_secret" name="access_token_secret"></input>
+        		<input type="text" size='70' id="access_token_secret" name="access_token_secret"></input>
     		</div>
+            <br>
 			<input type="submit" value="Submit"></input>
 		</form>
     </div>
